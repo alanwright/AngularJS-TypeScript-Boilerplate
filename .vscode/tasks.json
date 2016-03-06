@@ -23,11 +23,11 @@
 	// args is the HelloWorld program to compile.
 	"args": ["--out", "scripts/app.js",
         "app/typedefs.ts",
+        "app/module.ts",
         "app/components/greeting.ts",
         "app/contracts/contracts.ts",
         "app/controllers/greetingController.ts",
-        "app/services/proxyService.ts",
-        "app/module.ts"],
+        "app/services/proxyService.ts"],
 
 	// use the standard tsc problem matcher to find compile problems
 	// in the output.

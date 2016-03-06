@@ -7,11 +7,8 @@ module boilerplate {
     const appClass = ".app";
     
     angular.module(moduleName, ['ngRoute'])
-        
-        //Proxy Factory
         .factory('proxyService', ['$http', ($http: ng.IHttpService) => services.createProxyService($http)])
-        
-        // routing
+
         .config(['$routeProvider', (routeProvider: ng.route.IRouteProvider) => {
             
             routeProvider.when('/', {

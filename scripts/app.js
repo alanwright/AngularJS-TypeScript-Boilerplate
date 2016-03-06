@@ -2,6 +2,48 @@
 ///<reference path="../typedefs/angular/angular.d.ts"/>
 ///<reference path="../typedefs/angular/angular-route.d.ts"/>
 ///<reference path="../typedefs/lodash/lodash.d.ts"/> 
+'use strict';
+var boilerplate;
+(function (boilerplate) {
+    var moduleName = "boilerplate";
+    var appClass = ".app";
+    angular.module(moduleName, ['ngRoute'])
+        .factory('proxyService', ['$http', function ($http) { return boilerplate.services.createProxyService($http); }])
+        .config(['$routeProvider', function (routeProvider) {
+            routeProvider.when('/', {
+                templateUrl: 'app/views/greeting.html',
+                controller: ['proxyService', function (proxyService) {
+                        return new boilerplate.controllers.GreetingController(proxyService);
+                    }],
+                controllerAs: '$ctrl'
+            })
+                .otherwise({
+                templateUrl: 'app/views/error.html'
+            });
+        }]);
+    // Uncomment when a directive is used.
+    // export function registerDirective(directiveName: string) {
+    //     let loweredName = directiveName[0].toLowerCase() + directiveName.slice(1);
+    //     let annotatedFunction = [() => new boilerplate.directives[directiveName]()];
+    //     angular.module(moduleName).directive(loweredName, annotatedFunction);
+    // }
+    function registerComponent(componentName, options) {
+        var loweredName = componentName[0].toLowerCase() + componentName.slice(1);
+        angular.module(moduleName).component(loweredName, options);
+    }
+    boilerplate.registerComponent = registerComponent;
+    function bootstrap() {
+        angular.element(window.document).ready(function () {
+            var app = $(appClass);
+            app.attr('ng-app', moduleName);
+            angular.bootstrap(app, [moduleName]);
+        });
+    }
+    boilerplate.bootstrap = bootstrap;
+})(boilerplate || (boilerplate = {}));
+$(document).ready(function () {
+    boilerplate.bootstrap();
+});
 var boilerplate;
 (function (boilerplate) {
     var components;
@@ -78,45 +120,3 @@ var boilerplate;
         }());
     })(services = boilerplate.services || (boilerplate.services = {}));
 })(boilerplate || (boilerplate = {}));
-'use strict';
-var boilerplate;
-(function (boilerplate) {
-    var moduleName = "boilerplate";
-    var appClass = ".app";
-    angular.module(moduleName, ['ngRoute'])
-        .factory('proxyService', ['$http', function ($http) { return boilerplate.services.createProxyService($http); }])
-        .config(['$routeProvider', function (routeProvider) {
-            routeProvider.when('/', {
-                templateUrl: 'app/views/greeting.html',
-                controller: ['proxyService', function (proxyService) {
-                        return new boilerplate.controllers.GreetingController(proxyService);
-                    }],
-                controllerAs: '$ctrl'
-            })
-                .otherwise({
-                templateUrl: 'app/views/error.html'
-            });
-        }]);
-    // Uncomment when a directive is used.
-    // export function registerDirective(directiveName: string) {
-    //     let loweredName = directiveName[0].toLowerCase() + directiveName.slice(1);
-    //     let annotatedFunction = [() => new boilerplate.directives[directiveName]()];
-    //     angular.module(moduleName).directive(loweredName, annotatedFunction);
-    // }
-    function registerComponent(componentName, options) {
-        var loweredName = componentName[0].toLowerCase() + componentName.slice(1);
-        angular.module(moduleName).component(loweredName, options);
-    }
-    boilerplate.registerComponent = registerComponent;
-    function bootstrap() {
-        angular.element(window.document).ready(function () {
-            var app = $(appClass);
-            app.attr('ng-app', moduleName);
-            angular.bootstrap(app, [moduleName]);
-        });
-    }
-    boilerplate.bootstrap = bootstrap;
-})(boilerplate || (boilerplate = {}));
-$(document).ready(function () {
-    boilerplate.bootstrap();
-});
