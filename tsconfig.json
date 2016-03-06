@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "ES5"
+	},
+    "files": [
+        "app/typedefs.ts",
+        "app/components/error.ts",
+        "app/components/greeting.ts",
+        "app/contracts/contracts.ts",
+        "app/controllers/errorController.ts",
+        "app/controllers/greetingController.ts",
+        "app/services/proxyService.ts",
+        "app/module.ts"
+    ]
+}
