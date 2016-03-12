@@ -30,8 +30,9 @@ module boilerplate {
     //     angular.module(moduleName).directive(loweredName, annotatedFunction);
     // }
     
-    export function registerComponent(componentName: string, options: ng.IComponentOptions) {
+    export function registerComponent(componentName: string) {
         let loweredName = componentName[0].toLowerCase() + componentName.slice(1);
+        let options = new boilerplate.components[componentName]();
         angular.module(moduleName).component(loweredName, options);
     }
 

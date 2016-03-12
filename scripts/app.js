@@ -27,8 +27,9 @@ var boilerplate;
     //     let annotatedFunction = [() => new boilerplate.directives[directiveName]()];
     //     angular.module(moduleName).directive(loweredName, annotatedFunction);
     // }
-    function registerComponent(componentName, options) {
+    function registerComponent(componentName) {
         var loweredName = componentName[0].toLowerCase() + componentName.slice(1);
+        var options = new boilerplate.components[componentName]();
         angular.module(moduleName).component(loweredName, options);
     }
     boilerplate.registerComponent = registerComponent;
@@ -60,7 +61,7 @@ var boilerplate;
         components.Greeting = Greeting;
     })(components = boilerplate.components || (boilerplate.components = {}));
 })(boilerplate || (boilerplate = {}));
-boilerplate.registerComponent('Greeting', new boilerplate.components.Greeting());
+boilerplate.registerComponent('Greeting');
 var boilerplate;
 (function (boilerplate) {
     var controllers;

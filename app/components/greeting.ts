@@ -8,4 +8,4 @@ module boilerplate.components {
     }
 }
 
-boilerplate.registerComponent('Greeting', new boilerplate.components.Greeting());
+boilerplate.registerComponent('Greeting');
